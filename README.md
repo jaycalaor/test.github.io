@@ -1,1 +1,865 @@
-# test.github.io
+# test.github.io"use client";
+
+import { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "/components/ui/card";
+import { Button } from "/components/ui/button";
+import {
+  MapPin,
+  Wifi,
+  Car,
+  Coffee,
+  Store,
+  Train,
+  Clock,
+  CheckCircle,
+  Phone,
+  Mail,
+  Home,
+  Key,
+  AlertCircle,
+  ChevronRight,
+  Menu,
+  X,
+} from "lucide-react";
+
+export default function WelcomeGuide() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const attractions = [
+    {
+      name: "Mission San Luis Obispo",
+      type: "Historic Site",
+      distance: "0.5 miles",
+      icon: "🏛️",
+      description: "Beautiful 18th-century Spanish mission",
+    },
+    {
+      name: "San Luis Obispo Farmers Market",
+      type: "Market",
+      distance: "0.3 miles",
+      icon: "🌾",
+      description: "Thursday evening farmers market in downtown",
+    },
+    {
+      name: "Madonna Mountain Trail",
+      type: "Hiking",
+      distance: "1.2 miles",
+      icon: "⛰️",
+      description: "Easy hiking trail with city views",
+    },
+    {
+      name: "Bubblegum Alley",
+      type: "Unique Spot",
+      distance: "0.4 miles",
+      icon: "🎨",
+      description: "Quirky alley covered in colorful gum art",
+    },
+    {
+      name: "Bishop Peak Trail",
+      type: "Hiking",
+      distance: "3 miles",
+      icon: "🥾",
+      description: "Moderate hike with panoramic views",
+    },
+    {
+      name: "Downtown Plaza",
+      type: "Shopping/Dining",
+      distance: "0.3 miles",
+      icon: "🏪",
+      description: "Local shops, restaurants, and galleries",
+    },
+  ];
+
+  const cafes = [
+    {
+      name: "The Grind Coffee House",
+      type: "Coffee Shop",
+      distance: "0.4 miles",
+    },
+    {
+      name: "Sunroom Cafe",
+      type: "Cafe/Restaurant",
+      distance: "0.3 miles",
+    },
+    {
+      name: "Mod Coffee",
+      type: "Coffee Shop",
+      distance: "0.6 miles",
+    },
+    {
+      name: "Sally Loo's Cafe",
+      type: "Bakery/Cafe",
+      distance: "0.2 miles",
+    },
+  ];
+
+  const stores = [
+    { name: "Downtown Market", type: "Grocery", distance: "0.4 miles" },
+    {
+      name: "The Apple Farm Market",
+      type: "Farmers Market",
+      distance: "2 miles",
+    },
+    { name: "Trader Joe's", type: "Grocery", distance: "1.5 miles" },
+    { name: "Various Downtown Shops", type: "Retail", distance: "0.3 miles" },
+  ];
+
+  const checkinSteps = [
+    {
+      step: 1,
+      title: "Arrival",
+      description:
+        "Park in the designated guest parking area on the property or nearby street parking",
+      icon: Car,
+    },
+    {
+      step: 2,
+      title: "Entry",
+      description:
+        "Use the provided key code to unlock the front door. Code will be sent via email",
+      icon: Key,
+    },
+    {
+      step: 3,
+      title: "WiFi Connection",
+      description: 'Connect to "SLO_Guest" WiFi. Password is provided in the welcome packet',
+      icon: Wifi,
+    },
+    {
+      step: 4,
+      title: "Orientation",
+      description:
+        "Review house guide for thermostat, appliances, and emergency contacts",
+      icon: Home,
+    },
+  ];
+
+  const checkoutSteps = [
+    { step: 1, description: "Return all keys and access cards" },
+    { step: 2, description: "Ensure all doors and windows are locked" },
+    { step: 3, description: "Turn off lights and air conditioning/heating" },
+    { step: 4, description: "Empty trash and dishwasher if used" },
+    { step: 5, description: "Leave by 11:00 AM on checkout day" },
+  ];
+
+  const parkingInfo = [
+    {
+      type: "Primary Parking",
+      details: "Driveway parking available for 2 vehicles",
+      note: "Reserved for guests",
+    },
+    {
+      type: "Street Parking",
+      details: "Free street parking on Santa Barbara Avenue",
+      note: "Check local parking regulations",
+    },
+    {
+      type: "Guest Lot",
+      details: "Additional public parking nearby",
+      note: "Approximately 100 feet away",
+    },
+  ];
+
+  return (
+    <main className="min-h-screen bg-background">
+      {/* Header */}
+      <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 items-center justify-between">
+            {/* Logo */}
+            <div className="flex items-center">
+              <div className="h-8 w-8 text-primary font-bold text-xl">✈️</div>
+              <h1 className="ml-3 text-2xl font-bold text-foreground">
+                WayFarer
+              </h1>
+            </div>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center space-x-8">
+              <a
+                href="#check-in"
+                className="text-foreground transition-colors hover:text-primary"
+              >
+                Check-In
+              </a>
+              <a
+                href="#parking"
+                className="text-foreground transition-colors hover:text-primary"
+              >
+                Parking
+              </a>
+              <a
+                href="#explore"
+                className="text-foreground transition-colors hover:text-primary"
+              >
+                Explore
+              </a>
+              <a
+                href="#amenities"
+                className="text-foreground transition-colors hover:text-primary"
+              >
+                Amenities
+              </a>
+            </nav>
+
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="text-foreground hover:text-primary"
+              >
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile Navigation */}
+          {isMenuOpen && (
+            <div className="border-t border-border pb-4 pt-4 md:hidden">
+              <a
+                href="#check-in"
+                className="block px-3 py-2 text-foreground hover:text-primary"
+              >
+                Check-In
+              </a>
+              <a
+                href="#parking"
+                className="block px-3 py-2 text-foreground hover:text-primary"
+              >
+                Parking
+              </a>
+              <a
+                href="#explore"
+                className="block px-3 py-2 text-foreground hover:text-primary"
+              >
+                Explore
+              </a>
+              <a
+                href="#amenities"
+                className="block px-3 py-2 text-foreground hover:text-primary"
+              >
+                Amenities
+              </a>
+            </div>
+          )}
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-teal-50 to-cyan-50 py-16 lg:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h1 className="mb-4 text-4xl font-black leading-tight text-foreground sm:text-5xl lg:text-6xl">
+                Your Next{" "}
+                <span className="text-teal-600">Adventure Awaits</span>
+              </h1>
+
+              <p className="mx-auto mb-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+                Explore stunning destinations, unique experiences, and unforgettable
+                journeys with WayFarer.
+              </p>
+
+              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
+                Booking
+              </Button>
+            </div>
+
+            <div className="relative">
+              <img 
+                src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dde5eadd-1e51-4d03-8e33-092e554e5a70.png" 
+                alt="Scenic mountain valley with turquoise lake surrounded by dramatic alpine peaks and lush vegetation"
+                className="rounded-2xl shadow-2xl w-full h-full object-cover"
+              />
+            </div>
+          </div>
+
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="flex items-center rounded-lg bg-white/50 px-4 py-3 text-sm font-semibold text-foreground backdrop-blur">
+              <MapPin className="mr-2 h-4 w-4 text-primary" />
+              Location
+            </div>
+            <div className="flex items-center rounded-lg bg-white/50 px-4 py-3 text-sm font-semibold text-foreground backdrop-blur">
+              <Clock className="mr-2 h-4 w-4 text-primary" />
+              Check In
+            </div>
+            <div className="flex items-center rounded-lg bg-white/50 px-4 py-3 text-sm font-semibold text-foreground backdrop-blur">
+              <Clock className="mr-2 h-4 w-4 text-primary" />
+              Check Out
+            </div>
+            <div className="flex items-center rounded-lg bg-white/50 px-4 py-3 text-sm font-semibold text-foreground backdrop-blur">
+              <MapPin className="mr-2 h-4 w-4 text-primary" />
+              People
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Quick Info Cards */}
+      <section className="py-12 lg:py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            {/* Plane Card */}
+            <Card className="border-border transition-shadow hover:shadow-lg">
+              <CardHeader>
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-teal-100">
+                  <MapPin className="h-6 w-6 text-teal-600" />
+                </div>
+                <CardTitle className="text-xl font-bold">Plane</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="leading-relaxed">
+                  We provide flights to diverse countries to the most effortless travel.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            {/* Train Card */}
+            <Card className="border-border transition-shadow hover:shadow-lg">
+              <CardHeader>
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100">
+                  <Train className="h-6 w-6 text-blue-600" />
+                </div>
+                <CardTitle className="text-xl font-bold">Train</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="leading-relaxed">
+                  We provide train travel with a schedule according to the journey duration.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            {/* Bus Card */}
+            <Card className="border-border transition-shadow hover:shadow-lg">
+              <CardHeader>
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-cyan-100">
+                  <MapPin className="h-6 w-6 text-cyan-600" />
+                </div>
+                <CardTitle className="text-xl font-bold">Bus</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="leading-relaxed">
+                  We provide the bus with a schedule according to the journey destination.
+                </CardDescription>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Every Step of the Way */}
+      <section id="check-in" className="py-12 lg:py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="mb-4 text-3xl font-black text-foreground sm:text-4xl">
+                Every Step of the Way
+              </h2>
+              <p className="max-w-2xl text-muted-foreground mb-8">
+                Travel with ease and comfort. From private transfers to
+                group tours we ensure seamless transportation
+                throughout your journey.
+              </p>
+              
+              <div className="space-y-6">
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary">
+                      <MapPin className="h-5 w-5 text-white" />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground mb-1">Private Transfers</h3>
+                    <p className="text-sm text-muted-foreground">Comfortable and reliable transportation to your destinations</p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary">
+                      <Train className="h-5 w-5 text-white" />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground mb-1">Group Tours</h3>
+                    <p className="text-sm text-muted-foreground">Join fellow travelers and explore together</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <img 
+                src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2b190797-401c-4a71-a848-90860d7ad41e.png" 
+                alt="Scenic mountain road stretching through valley with winding curves and dramatic landscape"
+                className="rounded-lg w-full h-64 object-cover"
+              />
+              <img 
+                src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3ec3b641-a293-47ad-9ee6-0f9a649d4f26.png" 
+                alt="Modern tour bus with panoramic windows ready for scenic mountain journey"
+                className="rounded-lg w-full h-64 object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Parking Information */}
+      <section id="parking" className="py-12 lg:py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-12 text-center">
+            <h2 className="mb-4 text-3xl font-black text-foreground sm:text-4xl">
+              Parking Information
+            </h2>
+            <p className="mx-auto max-w-2xl text-muted-foreground">
+              Multiple convenient parking options available
+            </p>
+          </div>
+
+          <div className="mx-auto max-w-4xl">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+              {parkingInfo.map((parking, index) => (
+                <Card key={index} className="border-border">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-lg">
+                      <Car className="mr-3 h-5 w-5 text-primary" />
+                      {parking.type}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="mb-3 font-semibold text-foreground">
+                      {parking.details}
+                    </p>
+                    <div className="flex items-start rounded-lg bg-muted/50 p-3">
+                      <AlertCircle className="mr-2 h-4 w-4 flex-shrink-0 text-primary" />
+                      <p className="text-sm text-muted-foreground">
+                        {parking.note}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Explore Exclusive Tour Packages */}
+      <section id="explore" className="bg-muted/30 py-12 lg:py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-12">
+            <h2 className="mb-4 text-3xl font-black text-foreground sm:text-4xl">
+              Explore Our Exclusive Tour Packages
+            </h2>
+            <p className="max-w-2xl text-muted-foreground">
+              Find your perfect getaway with our curated tour packages. Adventure, relaxation or
+              culture—it's all here for you!
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {/* Tour Package 1 */}
+            <Card className="border-border overflow-hidden">
+              <div className="relative h-48 bg-muted">
+                <img 
+                  src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e62ba379-fe95-4c13-8cfd-a2e23d526bd3.png" 
+                  alt="Jaya Wijaya Mountain with golden grasslands and dramatic rock formations during sunset"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <CardHeader>
+                <CardTitle className="text-lg">Jaya Wijaya Mountain</CardTitle>
+                <div className="flex items-center gap-2 mt-2">
+                  <span className="text-sm text-primary font-semibold">5.5</span>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="font-semibold text-foreground mb-3">$456.80</p>
+                <ul className="text-sm text-muted-foreground space-y-1 mb-4">
+                  <li>• Including Accommodation</li>
+                  <li>• Free Professional Guide Tour</li>
+                  <li>• 3 Days 2 Nights Trip</li>
+                </ul>
+                <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+                  Booking
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Tour Package 2 */}
+            <Card className="border-border overflow-hidden">
+              <div className="relative h-48 bg-muted">
+                <img 
+                  src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/14d281bc-33de-48e0-87f3-01df71dac801.png" 
+                  alt="Mount Fuji snow-capped peak with serene blue sky and distant forested foothills"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <CardHeader>
+                <CardTitle className="text-lg">Fuji Mountain</CardTitle>
+                <div className="flex items-center gap-2 mt-2">
+                  <span className="text-sm text-primary font-semibold">4.8</span>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="font-semibold text-foreground mb-3">$456.80</p>
+                <ul className="text-sm text-muted-foreground space-y-1 mb-4">
+                  <li>• Including Accommodation</li>
+                  <li>• Free Professional Guide Tour</li>
+                  <li>• 3 Days 2 Nights Trip</li>
+                </ul>
+                <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+                  Booking
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Tour Package 3 */}
+            <Card className="border-border overflow-hidden">
+              <div className="relative h-48 bg-muted">
+                <img 
+                  src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bdec6d7c-760e-405f-9242-45d9febdec86.png" 
+                  alt="Kilimanjaro mountain peak with turquoise glacial lake and lush forest surrounding"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <CardHeader>
+                <CardTitle className="text-lg">Kilimanjaro</CardTitle>
+                <div className="flex items-center gap-2 mt-2">
+                  <span className="text-sm text-primary font-semibold">4.9</span>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="font-semibold text-foreground mb-3">$456.80</p>
+                <ul className="text-sm text-muted-foreground space-y-1 mb-4">
+                  <li>• Including Accommodation</li>
+                  <li>• Free Professional Guide Tour</li>
+                  <li>• 3 Days 2 Nights Trip</li>
+                </ul>
+                <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+                  Booking
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Tour Package 4 */}
+            <Card className="border-border overflow-hidden">
+              <div className="relative h-48 bg-muted">
+                <img 
+                  src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/44452d80-00bd-438d-9660-994dc4225f6d.png" 
+                  alt="Alpine mountain peak with hikers on rocky ridge against clear blue sky"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <CardHeader>
+                <CardTitle className="text-lg">Alpine Adventure</CardTitle>
+                <div className="flex items-center gap-2 mt-2">
+                  <span className="text-sm text-primary font-semibold">5.0</span>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="font-semibold text-foreground mb-3">$456.80</p>
+                <ul className="text-sm text-muted-foreground space-y-1 mb-4">
+                  <li>• Including Accommodation</li>
+                  <li>• Free Professional Guide Tour</li>
+                  <li>• 3 Days 2 Nights Trip</li>
+                </ul>
+                <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+                  Booking
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Amenities Section */}
+      <section id="amenities" className="py-12 lg:py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Cafes */}
+          <div className="mb-16">
+            <div className="mb-8 flex items-center">
+              <Coffee className="mr-3 h-8 w-8 text-primary" />
+              <h2 className="text-3xl font-black text-foreground">Nearby Cafes</h2>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+              {cafes.map((cafe, index) => (
+                <Card key={index} className="border-border">
+                  <CardContent className="pt-6">
+                    <p className="font-semibold text-foreground">{cafe.name}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {cafe.type}
+                    </p>
+                    <p className="mt-2 flex items-center text-sm text-primary">
+                      <MapPin className="mr-1 h-4 w-4" />
+                      {cafe.distance}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          {/* Stores */}
+          <div className="mb-16">
+            <div className="mb-8 flex items-center">
+              <Store className="mr-3 h-8 w-8 text-primary" />
+              <h2 className="text-3xl font-black text-foreground">Stores & Markets</h2>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+              {stores.map((store, index) => (
+                <Card key={index} className="border-border">
+                  <CardContent className="pt-6">
+                    <p className="font-semibold text-foreground">{store.name}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {store.type}
+                    </p>
+                    <p className="mt-2 flex items-center text-sm text-primary">
+                      <MapPin className="mr-1 h-4 w-4" />
+                      {store.distance}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          {/* Transportation */}
+          <div>
+            <div className="mb-8 flex items-center">
+              <Train className="mr-3 h-8 w-8 text-primary" />
+              <h2 className="text-3xl font-black text-foreground">
+                Transportation
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              <Card className="border-border">
+                <CardHeader>
+                  <CardTitle>Local Bus Service (SLO Transit)</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="mb-4 text-foreground">
+                    Easy access to downtown and nearby areas via local bus lines.
+                    Nearest stop is within walking distance.
+                  </p>
+                  <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                    View Routes
+                    <ChevronRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card className="border-border">
+                <CardHeader>
+                  <CardTitle>Car Rental Services</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="mb-4 text-foreground">
+                    Several car rental agencies available for exploring further.
+                    Nearest locations in downtown or airport.
+                  </p>
+                  <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                    Find Rentals
+                    <ChevronRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Let's Turn Imagination into Reality */}
+      <section className="relative bg-gradient-to-br from-teal-50 to-cyan-50 py-12 lg:py-16 rounded-2xl overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="relative h-96">
+              <img 
+                src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b731dbf1-b34f-4d6d-aeb0-27edc9e6aadf.png" 
+                alt="Golden sunset over mountain peaks with vibrant orange and purple sky reflecting on alpine landscape"
+                className="rounded-xl w-full h-full object-cover"
+              />
+            </div>
+
+            <div className="text-foreground">
+              <h2 className="mb-4 text-3xl font-black sm:text-4xl">
+                Let's Turn Imagination into{" "}
+                <span className="text-teal-600">Reality</span>
+              </h2>
+              <p className="mb-8 text-muted-foreground">
+                We are convinced that every journey is a wonderful and unforgettable
+                experience. We craft journeys that inspire, connect, and leave lasting memories.
+              </p>
+
+              <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
+                Contact Us
+              </Button>
+
+              <div className="mt-12 grid grid-cols-2 gap-8">
+                <div>
+                  <h3 className="text-2xl font-black text-primary mb-2">135+</h3>
+                  <p className="text-sm text-muted-foreground">Event Collaboration</p>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-black text-primary mb-2">100+</h3>
+                  <p className="text-sm text-muted-foreground">Professional Guides</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Emergency & Contact */}
+      <section className="py-12 lg:py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-12 text-center">
+            <h2 className="mb-4 text-3xl font-black text-foreground sm:text-4xl">
+              Emergency & Support
+            </h2>
+            <p className="mx-auto max-w-2xl text-muted-foreground">
+              We're here to help during your stay
+            </p>
+          </div>
+
+          <div className="mx-auto max-w-4xl grid grid-cols-1 gap-6 md:grid-cols-2">
+            <Card className="border-border">
+              <CardHeader>
+                <Phone className="mb-3 h-6 w-6 text-primary" />
+                <CardTitle>Property Support</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="mb-2 text-foreground font-semibold">
+                  (805) 555-0123
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Available 24/7 for emergencies and urgent issues
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-border">
+              <CardHeader>
+                <Mail className="mb-3 h-6 w-6 text-primary" />
+                <CardTitle>Email Support</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="mb-2 text-foreground font-semibold">
+                  support@sloguestrentals.com
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Response within 2 hours during business hours
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-border">
+              <CardHeader>
+                <AlertCircle className="mb-3 h-6 w-6 text-primary" />
+                <CardTitle>Emergency Services</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="mb-2 text-foreground font-semibold">911</p>
+                <p className="text-sm text-muted-foreground">
+                  For life-threatening emergencies only
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-border">
+              <CardHeader>
+                <Home className="mb-3 h-6 w-6 text-primary" />
+                <CardTitle>Property Address</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="mb-2 text-foreground font-semibold">
+                  2120 Santa Barbara Avenue
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  San Luis Obispo, CA 93401
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-border bg-card">
+        <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
+          <div className="mb-8 grid grid-cols-1 gap-8 md:grid-cols-3">
+            <div>
+              <h3 className="mb-4 text-lg font-bold text-foreground">
+                WayFarer
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                Journey transforms travel into unforgettable experiences. We craft
+                journeys that inspire, connect, and leave lasting memories.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="mb-4 font-semibold text-foreground">Quick Links</h4>
+              <ul className="space-y-2">
+                <li>
+                  <a
+                    href="#explore"
+                    className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                  >
+                    Tour Packages
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                  >
+                    About Us
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                  >
+                    Testimonials
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="mb-4 font-semibold text-foreground">Support</h4>
+              <ul className="space-y-2 text-sm">
+                <li className="flex items-center text-muted-foreground">
+                  <Phone className="mr-2 h-4 w-4" />
+                  (805) 555-0456
+                </li>
+                <li className="flex items-center text-muted-foreground">
+                  <Mail className="mr-2 h-4 w-4" />
+                  support@wayfarer.com
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="border-t border-border pt-8">
+            <p className="text-center text-sm text-muted-foreground">
+              © 2025 WayFarer Travels. All rights reserved. | Privacy Policy |
+              Terms of Service
+            </p>
+          </div>
+        </div>
+      </footer>
+    </main>
+  );
+}
